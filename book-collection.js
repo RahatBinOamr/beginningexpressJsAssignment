@@ -16,7 +16,10 @@ let books = [];
 app.get("/books", (req, res) => {
   res.json(books);
 });
-
+// Generate a unique ID for the book
+function generateId() {
+  return "_" + Math.random().toString(36).substr(2, 9);
+}
 // Add a book to the collection
 app.post("/books", (req, res) => {
   const { title, author, publishedDate } = req.body;
@@ -51,11 +54,6 @@ app.delete("/books/:id", (req, res) => {
   const deletedBook = books.splice(index, 1)[0];
   res.json({ message: "Book deleted successfully" });
 });
-
-// Generate a unique ID for the book
-function generateId() {
-  return "_" + Math.random().toString(36).substr(2, 9);
-}
 
 // Start the server
 app.listen(5000, () => {
